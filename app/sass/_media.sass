@@ -1,0 +1,41 @@
+/*==========  Desktop First  ==========*/
+
+/* Extra Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px)
+	/* Large Devices, Desktops */
+@media only screen and (max-width : 992px)
+	html 
+		font-size: 15px
+
+	/* Medium Devices, Tablets */
+@media only screen and (max-width : 768px)
+	html 
+		font-size: 14px
+
+	.navbar
+		height: 105px
+		&__logo
+			display: flex
+			justify-content: center
+
+	.team
+		&__memberItem
+			margin-top: 50px
+
+	/* Small Devices, Phones */
+@media only screen and (max-width : 576px)
+	html 
+		font-size: 13px
+	
+	.team
+		&__aboutMember
+			width: 100%
+		&__description
+			width: 100%
+			margin-bottom: 0
+		&__header
+			text-align: center
+
+	/* Custom Device */
+@media only screen and (max-width : 320px)
+	/**/
