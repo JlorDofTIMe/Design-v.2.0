@@ -47,28 +47,39 @@ const showItemDescription = e => {
 
 const scrollToSection = e => {
   e.preventDefault()
-  var menuItem = '.' + $(e.currentTarget).attr('date-link')
+
+  const menuItem = '.' + $(e.currentTarget).attr('date-link')
+  let coordinates = $(menuItem).offset().top
+  
+  const sectionPosition = $(menuItem).offset().top
+  const currentScrollPos = $(window).scrollTop()
+
+  if(currentScrollPos > sectionPosition) 
+    coordinates -= $('.navbar').height()
 
   $('html, body').animate({
-    scrollTop: $(menuItem).offset().top
+    scrollTop: coordinates
   }, 'slow')   
 }
 
 const toggleNavbar = () => {
   const $navbar = $('.navbar')
-  let SCROLL_POSITION = $('.navbar').offset().top
+  let scrollPosition = $('.navbar').offset().top
+
+  const animateNavBar = (opacity, trsY) => {
+    $navbar.css('opacity', `${opacity}`)
+    $navbar.css('transform', `translateY(${trsY}%)`)
+  }
 
   return () => {
-    if($navbar.offset().top > SCROLL_POSITION && $navbar.offset().top > $navbar.height()) {
-      $navbar.css('opacity', '0')
-      $navbar.css('transform', 'translateY(-100%)')
-      SCROLL_POSITION = $navbar.offset().top
+    if($navbar.offset().top > scrollPosition && $navbar.offset().top > $navbar.height()) {
+      animateNavBar(0, -100)
+      scrollPosition = $navbar.offset().top
     }
     
-    else if ($navbar.offset().top < SCROLL_POSITION) {
-      $navbar.css('opacity', '1')
-      $navbar.css('transform', 'translateY(0%)')
-      SCROLL_POSITION = $navbar.offset().top
+    else if ($navbar.offset().top < scrollPosition) {
+      animateNavBar(1, 0)
+      scrollPosition = $navbar.offset().top
     }
   }
 }
