@@ -1,4 +1,5 @@
-
+(function() {
+  
 const slickConfig = () => {
   $('.slider').slick({
     autoplay: true,
@@ -72,7 +73,8 @@ const toggleNavbar = () => {
   }
 
   return () => {
-    if($navbar.offset().top > scrollPosition && $navbar.offset().top > $navbar.height()) {
+    if($navbar.offset().top > scrollPosition 
+      && $navbar.offset().top > $navbar.height()) {
       animateNavBar(0, -100)
       scrollPosition = $navbar.offset().top
     }
@@ -96,3 +98,5 @@ $(document).ready(() => {
   $(window)
     .on('scroll', toggleNavbar())
 })
+
+})()
