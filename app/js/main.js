@@ -2,13 +2,16 @@
 const slickConfig = () => {
   $('.slider').slick({
     autoplay: true,
-    arrows: false
+    prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-angle-left"></i></button>',
+    nextArrow: '<button type="button" class="slick-next"><i class="fas fa-angle-right"></i></button>',
   })
 
   $('.design__slider').slick({
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
+    prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-angle-left"></i></button>',
+    nextArrow: '<button type="button" class="slick-next"><i class="fas fa-angle-right"></i></button>',
     responsive: [
       {
           breakpoint: 768, 
@@ -47,16 +50,16 @@ const scrollToSection = e => {
   var menuItem = '.' + $(e.currentTarget).attr('date-link')
 
   $('html, body').animate({
-    scrollTop: $(menuItem).offset().top - $('.navbar').height()
+    scrollTop: $(menuItem).offset().top
   }, 'slow')   
 }
 
 const toggleNavbar = () => {
-  var $navbar = $('.navbar')
-  var SCROLL_POSITION = $('.navbar').offset().top
+  const $navbar = $('.navbar')
+  let SCROLL_POSITION = $('.navbar').offset().top
 
   return () => {
-    if($navbar.offset().top > SCROLL_POSITION) {
+    if($navbar.offset().top > SCROLL_POSITION && $navbar.offset().top > $navbar.height()) {
       $navbar.css('opacity', '0')
       $navbar.css('transform', 'translateY(-100%)')
       SCROLL_POSITION = $navbar.offset().top
@@ -72,6 +75,7 @@ const toggleNavbar = () => {
 
 $(document).ready(() => {
   slickConfig()
+
   $('.design__sliderItem')
     .click(showItemDescription)
 
